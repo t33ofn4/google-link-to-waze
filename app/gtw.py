@@ -477,6 +477,10 @@ def get_wise_link(google_link: str, api_key):
 def index():
     if request.method == "POST":
         url = request.form.get("url")
+    elif request.method == "GET":
+        url = request.args.get("url")
+
+    if url:
         if not is_valid_google_url(url):
             logger.error("index: invalid url passed from user")
             return render_template_string(HTML_WRONG)
